@@ -1,0 +1,1129 @@
+NBA PROP MASTER RESEARCH PROMPT v1.0
+DATE CONTEXT: APRIL 4, 2026
+MODE: LATE-SEASON PLAYOFF-PUSH
+CLASSIFICATION: INTERNAL / SECURE - JOSEPH H. WILLIAMS ONLY
+
+NON-NEGOTIABLE RULES
+
+- No assumptions.
+- No hallucinations.
+- No shortcuts.
+- No hidden gap-filling.
+- No vague language.
+- No generic advice.
+- No sportsbook-Twitter reasoning.
+- No unsupported claims.
+- No fake source confidence.
+- No generic DvP as the primary matchup method.
+- No ATS or public-betting logic as a core decision driver.
+- No shallow gambling-content logic.
+
+================================================================================
+OUTPUT 1 - EXECUTIVE AUDIT OF CURRENT LIST
+================================================================================
+
+KEEP AS CORE
+
+INJURY STATUS
+Reason:
+The highest-impact input in prop betting. If availability is wrong, the entire
+projection is structurally invalid.
+
+STARTING LINEUPS
+Reason:
+Starting status and closing role determine the upper minute floor and immediate
+usage environment.
+
+DEPTH CHARTS
+Reason:
+Necessary for absence redistribution, rotation interpretation, and late-season
+youth-minute expansion analysis.
+
+REST DAYS / BACK-TO-BACK
+Reason:
+Exact rest context, not just generic fatigue language, directly affects minutes
+and efficiency.
+
+GAME SPREADS / TOTALS
+Reason:
+Spread drives blowout risk. Total sets pace and scoring environment context.
+
+FANDUEL PROP LINES
+Reason:
+The framework exists to evaluate a specific execution line. FanDuel is the
+binding execution sportsbook.
+
+LINE MOVEMENT
+Reason:
+Useful as a secondary validator when compared against projection logic, not as a
+substitute for it.
+
+ON/OFF SPLITS
+Reason:
+Reveal teammate dependency, lineup context, and player impact on team function.
+
+Q4 CLOSING RATE / PLAY-BY-PLAY DATA
+Reason:
+Competitive-game closing presence is the cleanest direct measure of true late
+game role.
+
+KEEP BUT REBUILD
+
+L3 / L5 / L8 / L10 GAME LOGS
+Reason:
+Correct concept, wrong flat-average treatment. Must become momentum-weighted,
+role-aware, and game-script-aware.
+
+SEASON AVERAGES
+Reason:
+Useful as lagged context only. Must be demoted from baseline projection input.
+
+ADVANCED STATS (USG%, TS%, NETRTG)
+Reason:
+Useful when narrowed to specific prop use cases and recent windows. Too vague in
+raw category form.
+
+TEAM PACE / ORTG / DRTG / NETRTG
+Reason:
+Correct category, but must use recent windows and Four Factors instead of stale
+full-season context.
+
+SAME-DAY REFEREE CREW
+Reason:
+Useful only when sourced from the official same-day posting. Needs stricter
+source discipline.
+
+DEMOTE TO BACKGROUND ONLY
+
+STANDINGS
+Reason:
+Standings are not a direct projection driver. They matter because they inform
+motivation class.
+
+HISTORICAL REFEREE RATES
+Reason:
+Conditionally relevant only if a verified historical database exists. No such
+free public source is confirmed.
+
+PUBLIC BETTING %
+Reason:
+Background only. Occasionally useful as context, never core logic.
+
+REMOVE FROM CORE
+
+ATS RECORDS
+Reason:
+Market-pricing artifact, not a player-performance mechanism.
+
+ATS / O-U TRENDS
+Reason:
+Recreational gambling content, not professional prop research.
+
+POSITION MATCHUP (GENERIC DvP)
+Reason:
+Too blunt to survive professional research standards. Must be replaced by
+play-type, zone-defense, contest-rate, and likely-defender analysis.
+
+MISSING AND MUST BE ADDED
+
+OPPONENT PLAY-TYPE DEFENSE
+Reason:
+Primary matchup mechanism for modern NBA offense.
+
+OPPONENT ZONE SHOOTING ALLOWED
+Reason:
+Critical for scoring and 3PM prop evaluation.
+
+PLAYER SHOT PROFILE
+Reason:
+Required companion to opponent zone-defense.
+
+TRACKING / OPPORTUNITY DATA
+Reason:
+Touches, drives, passes, and potential assists provide mechanism for AST and
+high-usage scoring props.
+
+CLOSEST-DEFENDER DATA
+Reason:
+Most granular free defensive-context layer available when correctly split.
+
+REBOUNDING CONTEXT / FOUR FACTORS
+Reason:
+Rebound props require available rebound environment, not only raw averages.
+
+ABSENCE REDISTRIBUTION
+Reason:
+When a key player is out, redistribution is not optional.
+
+LATE-SEASON MOTIVATION CLASS
+Reason:
+April 4, 2026 conditions make this a mandatory front-end classification.
+
+FATIGUE INDEX
+Reason:
+Recent-minute load and travel compression affect performance independently of
+per-game averages.
+
+LINEUP STABILITY FLAG
+Reason:
+Recent role-era changes can invalidate rolling averages.
+
+DATA CONFIDENCE CLASS
+Reason:
+Every section requires transparent confidence tagging.
+
+================================================================================
+OUTPUT 2 - AUDIT TABLE
+================================================================================
+
+ITEM | CLASSIFICATION | REASON
+----------------------------------------------------------------------
+L3/L5/L8/L10 game logs | KEEP BUT REBUILD | Must become momentum-weighted and role-aware
+Season averages | KEEP BUT REBUILD | Background only, not live baseline
+Advanced stats | KEEP BUT REBUILD | Useful only with prop-specific role and window discipline
+Team pace / ORtg / DRtg / NetRtg | KEEP BUT REBUILD | Must use L10/L15 and Four Factors
+Standings | DEMOTE TO BACKGROUND | Motivation input, not direct projection
+ATS records | REMOVE FROM CORE | Market artifact
+Injury status | KEEP AS CORE | Hard mandatory same-day input
+Starting lineups | KEEP AS CORE | Hard mandatory role input
+Depth charts | KEEP AS CORE | Required for redistribution and rotation logic
+Rest days / back-to-back | KEEP AS CORE | Required schedule-load input
+Game spreads / totals | KEEP AS CORE | Blowout and pace context
+FanDuel prop lines | KEEP AS CORE | Actual execution market
+Public betting % | DEMOTE TO BACKGROUND | Context only
+Line movement | KEEP AS CORE | Secondary validator
+ATS/O-U trends | REMOVE FROM CORE | Recreational content, not mechanism
+Position matchup (DvP) | REMOVE FROM CORE | Replaced by true matchup layer
+Same-day referee crew | KEEP BUT REBUILD | Official same-day source only
+Historical referee rates | DEMOTE TO BACKGROUND | Unavailable unless verified database exists
+On/off splits | KEEP AS CORE | Team-context mechanism
+Q4 closing rate / play-by-play data | KEEP AS CORE | Competitive-game role measure
+
+================================================================================
+OUTPUT 3 - PROFESSIONAL FIELD SCHEMA (19 SECTIONS)
+================================================================================
+
+SECTION 1 - SLATE CONTEXT
+Level:
+Game-level
+
+Mandatory fields:
+- game_date
+- game_start_time_et
+- venue
+- home_team
+- away_team
+- games_remaining_in_regular_season
+- playoff_picture_snapshot_date
+
+Why it matters:
+Activates same-day timing rules and late-season overlay.
+
+Best source type:
+Official schedule source
+
+Granularity:
+Game-level
+
+SECTION 2 - TEAM SEEDING AND MOTIVATION CONTEXT
+Level:
+Team-level
+
+Mandatory fields:
+- current_seed
+- playoff_qualification_status
+- games_back_from_target_seed
+- home_court_incentive_flag
+- seeding_pressure_class
+- soft_shutdown_risk_flag
+
+Conditional fields:
+- youth_minutes_expansion_risk
+- veteran_rest_risk_note
+
+Why it matters:
+April 4 context makes motivation and shutdown risk structurally important.
+
+Best source type:
+Official standings plus same-day team context review
+
+Granularity:
+Team-level
+
+SECTION 3 - TEAM ENVIRONMENT PROFILE
+Level:
+Team-level
+
+Mandatory fields:
+- team_pace_l10
+- team_pace_l15
+- team_ortg_l10
+- team_drtg_l10
+- team_netrtg_l10
+- four_factors_l10
+- four_factors_l15
+
+Background fields:
+- team_pace_season
+- team_ortg_season
+- team_drtg_season
+
+Why it matters:
+Defines current possession and efficiency environment.
+
+Best source type:
+NBA.com recent-window team dashboards or nba_api equivalent
+
+Granularity:
+Team-level recent window
+
+SECTION 4 - TEAM PLAY-TYPE PROFILE
+Level:
+Team-level offense and opponent-level defense
+
+Mandatory fields:
+- team_pnr_ballhandler_freq
+- team_pnr_ballhandler_ppp
+- team_pnr_rollman_freq
+- team_pnr_rollman_ppp
+- team_spot_up_freq
+- team_spot_up_ppp
+- team_transition_freq
+- team_transition_ppp
+
+Conditional fields:
+- team_isolation_freq
+- team_isolation_ppp
+- team_post_freq
+- team_post_ppp
+- team_handoff_freq
+- team_handoff_ppp
+
+Qualification note:
+Minimum 10 min/game and 10 possessions per play type to qualify.
+
+Why it matters:
+This is the core offensive-style layer and direct matchup mechanism.
+
+Best source type:
+NBA.com play-type dashboards or nba_api SynergyPlayTypes
+
+Granularity:
+Team-level and play-type-level
+
+SECTION 5 - PLAYER BASELINE BOX-SCORE AND RATE PROFILE
+Level:
+Player-level
+
+Mandatory fields:
+- pts_l3 / l5 / l8 / l10
+- reb_l3 / l5 / l8 / l10
+- ast_l3 / l5 / l8 / l10
+- threepm_l3 / l5 / l8 / l10
+- min_l3 / l5 / l8 / l10
+- fga_l5
+- threepa_l5
+- fta_l5
+- usg_l10
+- ts_pct_l10
+
+Conditional fields:
+- stl_l5
+- blk_l5
+- tov_l5
+
+Why it matters:
+The research baseline must start with real recent production and minute context.
+
+Best source type:
+Game-log source plus recent advanced dashboard
+
+Granularity:
+Player game-by-game
+
+SECTION 6 - PLAYER ROLE AND MINUTES PROJECTION
+Level:
+Player-level
+
+Mandatory fields:
+- starter_flag
+- rotation_stability_class
+- closing_rate_l10
+- projected_minutes_tonight
+- blowout_minutes_adjustment
+- role_fragility_score
+- home_away_adjustment_factor
+
+Conditional fields:
+- usg_adjustment_if_key_absence
+- restriction_cap_if_stated
+
+Why it matters:
+Minutes are the denominator of every counting-stat projection.
+
+Best source type:
+Integrated role model using lineup, injury, rotation, and recent-minute data
+
+Granularity:
+Player-level tonight estimate
+
+SECTION 7 - INJURY AND AVAILABILITY LAYER
+Level:
+Player-level
+
+Mandatory fields:
+- player_status
+- injury_description
+- restriction_severity
+- last_status_update_timestamp
+- minutes_restriction_flag
+- back_to_back_flag
+- minutes_last_7_days
+
+Conditional fields:
+- gtd_historical_play_rate
+- load_management_history_this_season
+
+Why it matters:
+Same-day availability overrides every historical baseline.
+
+Best source type:
+Official injury report first, verified same-day secondary sources second
+
+Granularity:
+Player-level same-day
+
+SECTION 8 - ABSENCE REDISTRIBUTION LAYER
+Level:
+Player-level
+
+Conditional activation:
+Only when a key teammate is OUT or functionally unavailable.
+
+Fields:
+- absent_player_id
+- absent_player_usg_pct
+- redistribution_candidates
+- usg_adjustment_per_candidate
+- minutes_redistribution
+- historical_role_expansion_precedent
+
+Why it matters:
+Absence-driven role expansion is a core mechanism, not an optional note.
+
+Best source type:
+Usage baseline plus inactive-on / inactive-off game splits
+
+Granularity:
+Player-level derived estimate
+
+SECTION 9 - LINEUP AND ON/OFF COURT LAYER
+Level:
+Lineup-level and player-level
+
+Mandatory fields:
+- projected_starting_5
+- lineup_net_rating_with_player
+- lineup_net_rating_without_player
+- on_off_differential
+- primary_lineup_combination
+- lineup_changes_l5_flag
+- opponent_primary_lineup
+
+Why it matters:
+Production can be lineup-dependent rather than purely individual.
+
+Best source type:
+Official lineup dashboards and on/off summary
+
+Granularity:
+Lineup-level
+
+SECTION 10 - TRACKING AND OPPORTUNITY LAYER
+Level:
+Player-level
+
+Mandatory fields:
+- touches_per_game_l10
+- passes_per_game_l10
+- potential_assists_per_game_l10
+
+Conditional fields:
+- drives_per_game_l10
+- front_court_touches_l10
+- paint_points_per_game_l10
+- contested_rebound_opportunities_l10
+
+Why it matters:
+Opportunity metrics create mechanism for AST and high-usage scoring props.
+
+Best source type:
+NBA.com tracking dashboards or confirmed nba_api equivalents
+
+Granularity:
+Player-level recent window
+
+SECTION 11 - SHOOTING PROFILE AND SHOT QUALITY LAYER
+Level:
+Player-level
+
+Mandatory fields:
+- shot_zone_frequency
+- shot_zone_efficiency
+- catch_and_shoot_pct
+- contested_shot_profile
+- shot_quality_proxy
+
+Conditional fields:
+- pull_up_three_pct
+- open_shot_profile
+
+Why it matters:
+Scoring props must connect player shot mix to opponent defensive allowance.
+
+Best source type:
+Official shooting dashboards and closest-defender shooter splits
+
+Granularity:
+Player-level zone and shot-type
+
+SECTION 12 - OPPONENT DEFENSIVE MATCHUP LAYER
+Level:
+Opponent-level and matchup-level
+
+Mandatory fields:
+- opp_defensive_rating_l10
+- opp_play_type_defense_by_type
+- opp_team_contest_rate
+- opp_zone_shooting_allowed
+- opp_rim_deterrence
+- opp_three_point_rate_allowed
+
+Conditional fields:
+- opp_primary_defender_quality
+- opp_foul_rate_allowed
+- opp_switch_rate
+- dVp_proxy_flag
+
+Qualification note:
+Play-type data requires 10 min/game and 10 possessions per type.
+
+Why it matters:
+This section replaces generic DvP entirely.
+
+Best source type:
+NBA.com defense dashboards plus nba_api TeamDashPtShots and SynergyPlayTypes
+
+Granularity:
+Opponent and matchup-specific
+
+SECTION 13 - CLUTCH AND CLOSING-GAME LAYER
+Level:
+Player-level and game-level
+
+Mandatory fields:
+- clutch_usg_pct
+- q4_minutes_l10
+- q4_closing_rate
+- blowout_game_exclusion_flag
+
+Conditional fields:
+- overtime_risk_flag
+- clutch_net_rating
+
+Why it matters:
+Competitive-game closers have a materially different ceiling than non-closers.
+
+Best source type:
+NBA.com clutch dashboard plus play-by-play library
+
+Granularity:
+Player-level leverage minutes
+
+SECTION 14 - REBOUNDING / HUSTLE / PHYSICALITY LAYER
+Level:
+Player-level and opponent-level
+
+Mandatory fields:
+- orb_pct
+- drb_pct
+- contested_rebound_pct_l10
+- opp_orb_pct
+- opp_drb_pct
+
+Conditional fields:
+- foul_draw_rate_l10
+- physical_matchup_class
+
+Why it matters:
+Rebound props depend on available rebound environment and contest profile.
+
+Best source type:
+NBA.com hustle and Four Factors context
+
+Granularity:
+Player and team context
+
+SECTION 15 - OFFICIATING LAYER
+Level:
+Game-level
+
+Mandatory if verifiable:
+- referee_crew_tonight
+
+Conditional fields:
+- crew_foul_rate_avg
+- crew_ou_rate
+- foul_environment_class
+
+Why it matters:
+Useful for FTA-dependent props only when sourced from verified data.
+
+Best source type:
+Official same-day referee assignments; verified historical database if one
+exists
+
+Granularity:
+Game-level
+
+SECTION 16 - MARKET LAYER
+Level:
+Game-level and prop-level
+
+Mandatory fields:
+- fd_prop_line
+- fd_over_odds
+- fd_under_odds
+- fd_snapshot_timestamp
+- opening_line
+- current_line_delta
+- consensus_line_multibook
+- devigged_fair_probability
+
+Conditional fields:
+- sharp_money_signal
+- public_betting_pct
+
+Why it matters:
+Defines the actual execution price and consensus valuation context.
+
+Best source type:
+FanDuel direct for execution, approved valuation books for comparison
+
+Granularity:
+Prop-level
+
+SECTION 17 - DATA QUALITY / TIMESTAMP / AUDIT LAYER
+Level:
+System-level
+
+Mandatory fields:
+- timestamp_per_field
+- source_per_field
+- stale_data_flags
+- conflict_resolution_log
+- missing_field_log
+- data_confidence_class
+
+Why it matters:
+The engine is only as trustworthy as its provenance control.
+
+Best source type:
+System audit discipline
+
+Granularity:
+Per field and per section
+
+SECTION 18 - LATE-SEASON PLAYOFF-PUSH OVERLAY
+Level:
+Game-level
+
+Mandatory fields:
+- seeding_pressure_class
+- motivation_class
+- data_vintage_weighting_decision
+- rotation_change_risk_class
+- rest_risk_class
+- youth_minutes_risk_flag
+
+Why it matters:
+April 4, 2026 is not midseason. Motivation and role volatility are elevated.
+
+Best source type:
+Derived from standings, schedule, injury, and lineup context
+
+Granularity:
+Game-level and team-level overlay
+
+SECTION 19 - PROP-SPECIFIC SYNTHESIS LAYER
+Level:
+Output layer
+
+Mandatory fields:
+- player
+- prop_stat_type
+- fd_prop_line
+- fair_probability_over
+- model_probability_over
+- implied_edge
+- key_risk_factors
+- confidence_class
+- hard_fail_flags_triggered
+- final_recommendation
+
+Why it matters:
+The final output must compress the research into a bet/no-bet decision contract.
+
+Best source type:
+Integrated synthesis from all prior sections
+
+Granularity:
+Single prop decision
+
+================================================================================
+OUTPUT 4 - LATE-SEASON APRIL 4, 2026 OVERLAY RULES
+================================================================================
+
+RULE 1 - SEEDING INCENTIVE TIERS
+
+HIGH_URGENCY
+- Within 2 games of a meaningful seed target or cutoff
+- No clinch of desired position
+- Five or fewer games remaining or every remaining game materially matters
+
+MODERATE_URGENCY
+- Meaningful seed movement still available
+- Not immediate elimination or clinch pressure
+
+LOW_URGENCY
+- Team has something to play for, but marginal urgency is limited
+
+LOCKED_OUT_RISK
+- Seed effectively locked or improvement path functionally gone
+
+ELIMINATED_RISK
+- Team eliminated or operating like an eliminated team
+
+RULE 2 - PLAY-IN INCENTIVE VS PLAY-IN ELIMINATION
+
+- Play-in pursuit raises urgency for veteran minutes and closing continuity.
+- Play-in elimination risk increases volatility because every loss changes team
+  behavior sharply.
+
+RULE 3 - HOME-COURT FIGHT VS LOCKED-SEED REST
+
+- Home-court race supports stable veteran usage.
+- Locked-seed teams carry elevated rest and soft-shutdown risk.
+
+RULE 4 - SOFT SHUTDOWN / VETERAN REST RISK
+
+Increase shutdown risk when:
+- team is LOCKED_OUT_RISK or ELIMINATED_RISK
+- player is older veteran
+- player has heavy recent minute load
+- player has prior load-management history
+
+RULE 5 - ROTATION TIGHTENING VS EXPERIMENTAL LINEUPS
+
+- HIGH_URGENCY teams usually tighten to trustworthy rotations.
+- ELIMINATED_RISK teams often expand youth minutes and experimental lineups.
+
+RULE 6 - YOUTH-MINUTE EXPANSION RISK
+
+Raise risk when:
+- team is eliminated
+- fringe younger players have gained minutes in last 3 to 5 games
+- veterans show reduced Q4 or blowout exposure
+
+RULE 7 - FULL-SEASON DATA DISCOUNT
+
+- Full-season averages are background only in April.
+- Recent role-era data overrides old-season role context.
+
+RULE 8 - WHEN L10 > L5 > L3
+
+Prefer broader recent windows when:
+- role is stable
+- starting lineup is stable
+- no recent injuries changed usage
+- team motivation has not shifted materially
+
+RULE 9 - WHEN TO INVERT AND PRIORITIZE L3
+
+Prioritize L3 most heavily when:
+- role changed recently
+- teammate absence changed usage
+- lineup configuration changed
+- late-season urgency altered rotation behavior
+
+RULE 10 - WHEN RECENT GAMES MISLEAD
+
+Recent games can mislead when:
+- they include blowouts
+- they include foul-trouble or restriction games
+- lineup configuration changed mid-window
+- youth-minute expansion has started
+
+RULE 11 - WHEN MOTIVATION CHANGES A BET VS WHEN IT IS NOISE
+
+Motivation is material only when it plausibly changes:
+- minutes
+- lineup stability
+- closing role
+- veteran rest risk
+- usage concentration
+
+If it does not change one of those, it is background noise and must not be used
+as narrative filler.
+
+================================================================================
+OUTPUT 5 - SOURCE MAP
+================================================================================
+
+PLAYER INJURY STATUS AND AVAILABILITY
+Preferred source class:
+Official NBA injury report PDF
+Acceptable fallback class:
+Verified same-day injury aggregators
+Same-day sensitive:
+YES
+Stale data invalidation:
+YES
+Hard-fail if missing:
+YES
+
+STARTING LINEUPS AND ROTATION DEPTH
+Preferred source class:
+Verified same-day lineup source
+Acceptable fallback class:
+Depth chart plus same-day lineup note
+Same-day sensitive:
+YES
+Stale data invalidation:
+YES
+Hard-fail if missing:
+YES when role is ambiguous
+
+PLAYER GAME LOGS
+Preferred source class:
+Game-by-game query source
+Acceptable fallback class:
+Historical game-log archive
+Same-day sensitive:
+NO
+Stale data invalidation:
+NO
+Hard-fail if missing:
+YES when sample falls below minimum
+
+ADVANCED RATE STATS
+Preferred source class:
+NBA.com or nba_api recent-window advanced stats
+Acceptable fallback class:
+Statmuse advanced query
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES if prior-season or non-current-role data is substituted
+Hard-fail if missing:
+NO
+
+TEAM ENVIRONMENT
+Preferred source class:
+NBA.com recent-window team dashboards
+Acceptable fallback class:
+TeamRankings and Statmuse
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES for prior-season use
+Hard-fail if missing:
+NO
+
+PLAY-TYPE OFFENSE AND DEFENSE
+Preferred source class:
+NBA.com play-type dashboards or nba_api SynergyPlayTypes
+Acceptable fallback class:
+Consolidated playtype-misc summary
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES when role era has changed
+Hard-fail if missing:
+NO, but lowers matchup quality materially
+
+OPPONENT ZONE SHOOTING ALLOWED
+Preferred source class:
+nba_api TeamDashPtShots
+Acceptable fallback class:
+distance-based defense dashboards as explicit proxy
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES for prior-season data
+Hard-fail if missing:
+YES if no usable primary or proxy matchup layer exists
+
+PLAYER SHOOTING PROFILE AND SHOT QUALITY
+Preferred source class:
+NBA.com shooting dashboards
+Acceptable fallback class:
+nba_api equivalent
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES for prior-season use
+Hard-fail if missing:
+NO, but scoring-prop confidence must drop
+
+TRACKING / OPPORTUNITY DATA
+Preferred source class:
+NBA.com tracking dashboards
+Acceptable fallback class:
+confirmed nba_api endpoint
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES when data reflects outdated role
+Hard-fail if missing:
+NO, but AST and high-usage scoring props lose mechanism support
+
+LINEUPS / ON-OFF
+Preferred source class:
+NBA.com lineups plus team-specific on/off summary
+Acceptable fallback class:
+local nba_api on/off endpoint
+Same-day sensitive:
+NO in aggregate, YES when current lineup context changed
+Stale data invalidation:
+YES when current lineup era differs
+Hard-fail if missing:
+NO
+
+CLUTCH / CLOSING CONTEXT
+Preferred source class:
+NBA.com clutch plus pbpstats Python library
+Acceptable fallback class:
+manual play-by-play review
+Same-day sensitive:
+NO
+Stale data invalidation:
+YES when older role era dominates sample
+Hard-fail if missing:
+NO
+
+MARKET DATA
+Preferred source class:
+FanDuel direct for execution
+Acceptable fallback class:
+Action Network / OddsShark for validation and movement only
+Same-day sensitive:
+YES
+Stale data invalidation:
+YES
+Hard-fail if missing:
+YES for FanDuel execution line
+
+REFEREE CONTEXT
+Preferred source class:
+Official same-day referee assignments
+Acceptable fallback class:
+None for same-day assignment; verified database only for historical rates
+Same-day sensitive:
+YES
+Stale data invalidation:
+YES
+Hard-fail if missing:
+NO for historical crew rates, but must log UNDETERMINED
+
+PROHIBITED OR UNAVAILABLE SOURCE NOTES
+
+- Basketball Reference: manual browser reference only, not pipeline source
+- Second Spectrum: enterprise-only, not accessible
+- RefMetrics: removed until directly verified
+- tracking.pbpstats.com: paid web UI, not free source
+
+================================================================================
+OUTPUT 6 - HARD-FAIL VALIDATION RULES
+================================================================================
+
+HF-01: No current FanDuel line or odds for the target prop
+
+HF-02: Minutes restriction confirmed but no specific cap or minutes range stated
+
+HF-03: Same-day player status conflict unresolved
+
+HF-04: No projected lineup verification and role remains ambiguous
+
+HF-05: No minutes projection rationale tied to current role and context
+
+HF-06: No absence redistribution model applied when a key player is absent
+
+HF-07: No current market timestamp
+
+HF-08: No matchup-specific shot-profile or play-type context for a scoring or
+3PM prop
+
+HF-09: No late-season motivation classification
+
+HF-10: No source timestamps on live fields
+
+HF-11: Stale or conflicting live data with no logged resolution decision
+
+HF-12: Official injury status missing or official NBA injury report inaccessible
+
+HF-13: Player officially OUT or INACTIVE
+
+HF-14: Back-to-back status cannot be confirmed
+
+HF-15: Fewer than 8 relevant games in usable sample
+
+HF-16: Distribution fit invalid for the probability model
+
+HF-17: No usable primary matchup layer and no approved fallback proxy
+
+HF-18: Required model estimate presented as fact without MODEL ESTIMATE label
+
+HF-19: Missing-field log omitted despite absent required data
+
+HF-20: Generic DvP, ATS, or public-betting logic used as primary mechanism
+
+Hard-fail action:
+Return NO RECOMMENDATION and list all triggered hard-fail flags explicitly.
+
+================================================================================
+OUTPUT 7 - FINAL MASTER PROMPT SKELETON
+================================================================================
+
+Use the following prompt skeleton exactly as the operational base for NBA prop
+research.
+
+BEGIN MASTER PROMPT
+
+You are conducting professional NBA player prop research for Joseph H. Williams.
+Date context is April 4, 2026 and late-season playoff-push rules are mandatory.
+
+NON-NEGOTIABLE BEHAVIOR
+
+- Do not guess.
+- Do not hallucinate.
+- Do not fill gaps with invented logic.
+- Do not use vague phrases such as "good matchup", "hot lately", or "should do well".
+- Do not use generic DvP as the primary matchup method.
+- Do not use ATS trends, ATS records, or public betting percentages as core logic.
+- Do not cite any source that is not verified or explicitly approved.
+- Do not present model estimates as facts.
+- Do not silently ignore missing data.
+
+LIVE DATA RULES
+
+- Every live field must include a source and timestamp.
+- Injury status must be verified from the official NBA injury report with
+  same-day secondary verification.
+- Lineup context must be verified within 2 hours of tipoff.
+- Market data must include the exact FanDuel line and timestamp.
+- If live data is stale, conflicting, or unresolved, trigger the appropriate
+  hard fail.
+
+SOURCE RULES
+
+- NBA.com browser and nba_api local access are separate methods and must be
+  described correctly.
+- Use nba_api for TeamDashPtShots, SynergyPlayTypes, and TeamPlayerOnOffSummary
+  when structured access is required.
+- Basketball Reference is not a valid pipeline source.
+- Second Spectrum is not accessible and must not be cited as usable input.
+- RefMetrics must not be named unless directly verified.
+- tracking.pbpstats.com web interface is paid and must not be used as a free
+  source. Use the pbpstats Python library instead.
+
+MANDATORY RESEARCH ORDER
+
+1. Verify player injury status and availability.
+2. Verify starting lineup and role context.
+3. Classify team seeding pressure and motivation.
+4. Capture FanDuel line, odds, and timestamp.
+5. Build L3, L5, L8, and L10 game-log view.
+6. Build current team environment using recent windows.
+7. Apply absence redistribution if a key teammate is out.
+8. Build lineup and on/off context.
+9. Build tracking and opportunity context.
+10. Build shooting profile and opponent matchup layer.
+11. Apply late-season April 4, 2026 overlay rules.
+12. Run hard-fail validation.
+13. Produce structured synthesis only if no hard fail blocks the bet.
+
+LATE-SEASON OVERLAY IS MANDATORY
+
+Before synthesis, classify:
+- seeding_pressure_class
+- motivation_class
+- soft_shutdown_risk_flag
+- youth_minutes_expansion_risk
+- data_vintage_weighting_decision
+
+If you have not classified late-season motivation, the analysis is incomplete.
+
+REQUIRED MATCHUP METHOD
+
+For scoring and 3PM props:
+- player shot profile
+- opponent zone shooting allowed
+- opponent play-type defense
+- team contest rate
+- likely primary defender quality when available
+
+For AST props:
+- passes
+- potential assists
+- touches
+- play-type creation context
+
+For REB props:
+- rebound rates
+- contested rebound profile
+- Four Factors rebound environment
+
+STRUCTURED OUTPUT FORMAT
+
+FACTS
+- List verified facts only, each with source and timestamp.
+
+MODEL ESTIMATES
+- List every estimate with MODEL ESTIMATE label.
+
+MISSING OR UNAVAILABLE
+- List every missing or unavailable field explicitly.
+
+PROP SYNTHESIS
+- player
+- prop_type
+- FanDuel line
+- side under evaluation
+- fair_probability_over
+- model_probability_over [MODEL ESTIMATE]
+- implied_edge
+- seeding_pressure_class
+- confidence_class
+- hard_fail_flags
+- mechanism_summary
+
+MECHANISM SUMMARY RULE
+
+State the reason in mechanism form, not narrative fluff.
+Examples of mechanism language:
+- usage expansion due to confirmed absence
+- favorable P&R ball-handler matchup versus opponent weakness
+- catch-and-shoot volume aligned with opponent above-break allowance
+- rebound environment suppressed by opponent DRB%
+
+HARD-FAIL HANDLING
+
+If any hard fail triggers:
+- output NO RECOMMENDATION
+- list every triggered hard-fail flag
+- do not force a side
+
+END MASTER PROMPT
+
+END OF MASTER RESEARCH PROMPT v1.0

@@ -1,0 +1,1157 @@
+NBA PROP ENGINE PROFESSIONAL FRAMEWORK v2.0
+DATE: APRIL 5, 2026
+MODE: LATE-SEASON PLAYOFF-PUSH
+CLASSIFICATION: INTERNAL / SECURE - JOSEPH H. WILLIAMS ONLY
+SUPERSEDES: NBA_PROP_ENGINE_PROFESSIONAL_FRAMEWORK_v1.0
+
+================================================================================
+PART 1 - OVERVIEW AND PURPOSE
+================================================================================
+
+1.1 WHAT THIS DOCUMENT IS
+
+This framework is the authoritative human-readable operating guide for NBA player
+prop research and FanDuel execution inside Joseph H. Williams' NBA prop engine
+workflow. It defines:
+
+- what data must be collected
+- which sources are allowed
+- which formulas are applied
+- which hard-fail conditions invalidate a bet
+- how confidence is assigned
+- how final output must be formatted
+
+It is a research and decision framework, not the Python implementation itself.
+The Python codebase implements engine machinery. This document governs research
+standards, source discipline, section structure, and evaluation logic.
+
+1.2 WHO THIS FRAMEWORK IS FOR
+
+This framework is written for Joseph H. Williams' internal use only. It assumes
+manual oversight, zero-shortcut verification, and same-day risk control.
+
+1.3 SCOPE
+
+This framework covers:
+
+- NBA player prop research
+- FanDuel-only execution
+- late-season April 2026 motivation and rotation risk
+- research section order
+- approved and prohibited sources
+- formulas and model-parameter disclosures
+- hard-fail conditions
+- confidence scoring
+- final output contract
+
+1.4 FANDUEL-ONLY EXECUTION RULE
+
+FanDuel is the execution sportsbook for this framework. Multi-book data may be
+used for valuation, consensus context, and line-movement review, but the actual
+bet under evaluation is always the exact FanDuel line and price captured at a
+timestamp.
+
+1.5 JOSEPH LOCAL INSTALL PATH
+
+Joseph local engine path:
+C:\Users\jhawi\Downloads\NBA-Parley--main\NBA-Parley--main
+
+The framework assumes NBA.com structured endpoint access is available through
+local Python on this machine.
+
+1.6 NON-NEGOTIABLE OPERATING RULES
+
+- No assumptions.
+- No hallucinations.
+- No hidden gap-filling.
+- No vague language.
+- No unsupported claims.
+- No generic DvP as the primary matchup method.
+- No ATS or public-betting logic as a core decision driver.
+- No using full-season averages as current truth in April.
+- Every live field must carry a source and timestamp.
+- Every missing field must be logged as MISSING or UNAVAILABLE.
+- Every model estimate must be labeled as MODEL ESTIMATE.
+- Every design coefficient or threshold that is not empirically validated must
+  carry a [MODEL PARAMETER] label.
+- Any hard-fail condition forces NO RECOMMENDATION.
+
+================================================================================
+PART 2 - DATA ACCESS ARCHITECTURE
+================================================================================
+
+2.1 ACCESS METHOD A - BROWSER
+
+The NBA.com stats website is publicly accessible in a browser at:
+nba.com/stats
+
+Characteristics:
+
+- no login required for current-season public data
+- JavaScript-rendered
+- human-readable tables
+- appropriate for manual inspection and browser filtering
+- not equivalent to direct raw HTTP scraping
+
+2.2 ACCESS METHOD B - nba_api PYTHON LIBRARY
+
+The nba_api Python library provides structured access to stats.nba.com API
+endpoints from a local machine.
+
+GitHub:
+github.com/swar/nba_api
+
+Install:
+pip install nba_api
+
+Availability:
+
+- free
+- no authentication required for current-season public data
+- works on Joseph's local machine
+- blocked on common cloud hosting providers
+
+Key endpoints used by this framework:
+
+- SynergyPlayTypes
+- TeamDashPtShots
+- TeamPlayerOnOffSummary
+- PlayerDashPtShots
+- PlayerDashPtPass
+- LeagueDashTeamStats
+- LeagueDashPlayerStats
+- TeamGameLog
+- PlayerGameLog
+
+2.3 NBA.COM SEASON SEGMENT FILTER
+
+Most NBA.com dashboards used in this framework provide a native Season Segment
+filter. Confirmed examples include:
+
+- players/advanced
+- players/traditional
+- players/boxscores-advanced
+- teams/four-factors
+- teams/advanced
+- teams/defense-dash-overall
+- teams/defense-dash-lt6
+- players/clutch-traditional
+
+Use case:
+
+- direct Last 10 Games and Last 15 Games official rolling windows
+- team environment and defensive context without manual aggregation
+- recent-window advanced stats from official source
+
+2.4 BASKETBALL REFERENCE PROHIBITION
+
+Basketball Reference is NOT a valid pipeline source for this framework.
+
+Reason:
+
+- Terms of Use prohibit automated scraping
+- using it as a pipeline source violates the allowed-source standard
+
+Allowed use:
+
+- manual one-off browser reference only
+
+Prohibited use:
+
+- automated pipeline source
+- cited structured source in research output
+
+2.5 SECOND SPECTRUM PROHIBITION
+
+Second Spectrum is NOT an accessible source for this engine.
+
+Reason:
+
+- enterprise-only tracking product
+- available to NBA teams, league media, and enterprise clients
+- not publicly accessible
+
+Allowed mention:
+
+- benchmark explanation only
+
+Prohibited use:
+
+- listed as a usable source
+- cited as an accessible input for shot quality
+
+2.6 SOURCE ACCESS DISCIPLINE
+
+- Browser access and local API access are distinct and must be described
+  correctly.
+- If the browser page exists but the structured API requires local Python,
+  document both methods separately.
+- If a source is unverified, mark it UNVERIFIED.
+- If a source is paid, mark it PAID.
+- If a source is unavailable, mark it UNAVAILABLE and do not imply access.
+
+================================================================================
+PART 3 - RESEARCH EXECUTION SEQUENCE
+================================================================================
+
+Each section below defines purpose, fields collected, approved sources, data
+staleness rules, and hard-fail exposure.
+
+SECTION 1 - PLAYER INJURY STATUS AND AVAILABILITY
+
+Purpose:
+Establish whether the player is active, restricted, questionable, or fully out.
+No prop evaluation has structural validity without verified same-day status.
+
+Fields collected:
+- player_status
+- injury_description
+- restriction_severity
+- last_status_update_timestamp
+- minutes_restriction_flag
+- same_day_status_resolution
+
+Sources:
+- official.nba.com/nba-injury-report-2025-26-season
+- covers.com/sport/basketball/nba/injuries
+- rotowire.com/basketball/injury-report.php
+
+Staleness rule:
+- same-day sensitive
+- maximum 4 hours stale before tipoff
+
+Hard-fail conditions:
+- HF-01 if same-day status cannot be verified
+- HF-03 if same-day sources conflict and conflict is unresolved
+- HF-07 if official designation is OUT or INACTIVE
+- HF-08 if official NBA injury report is inaccessible
+
+HF-02 REWRITE
+
+HF-02: MINUTES RESTRICTION FLAG IS TRUE AND SAME-DAY CONFIRMATION DOES NOT
+CLARIFY THE SPECIFIC CAP
+
+Condition:
+minutes_restriction_flag = TRUE AND the source (official injury report or
+same-day team statement) confirms a restriction exists but does not state the
+specific cap or expected minutes range.
+
+Rationale:
+A restriction without a stated cap cannot be modeled because the range of
+possible outcomes spans from 0 to 40 minutes. A projection built on that
+uncertainty is structurally invalid.
+
+Exception:
+If the restriction is confirmed AND a specific cap or minutes estimate is
+stated, HF-02 does NOT trigger. Produce a constrained projection at the stated
+cap with explicit MODEL ESTIMATE label.
+
+SECTION 2 - STARTING LINEUPS AND ROTATION DEPTH
+
+Purpose:
+Define starting role, immediate minute range, and replacement structure if a
+teammate is ruled out.
+
+Fields collected:
+- projected_starting_status
+- confirmed_starting_lineup
+- primary_bench_order
+- rotation_depth_context
+- role_ambiguity_flag
+
+Sources:
+- rotowire.com/basketball/nba-lineups.php
+- espn.com/nba/depth
+
+Staleness rule:
+- same-day sensitive
+- maximum 2 hours stale before tipoff
+
+Hard-fail conditions:
+- HF-04 if starting role remains ambiguous within 2 hours of tipoff
+
+SECTION 3 - TEAM ENVIRONMENT
+
+Purpose:
+Capture current team pace and efficiency environment using official recent
+rolling windows, not stale full-season assumptions.
+
+Fields collected:
+- team_pace_l10
+- team_pace_l15
+- team_ortg_l10
+- team_ortg_l15
+- team_drtg_l10
+- team_drtg_l15
+- team_netrtg_l10
+- team_netrtg_l15
+- four_factors_l10
+- four_factors_l15
+
+Sources:
+- nba.com/stats/teams/four-factors
+- nba.com/stats/teams/advanced
+- nba_api LeagueDashTeamStats
+- teamrankings.com/nba/stat/possessions-per-game
+- statmuse.com/nba
+
+Correction applied:
+Basketball Reference is explicitly removed as a pipeline source.
+
+Staleness rule:
+- not same-day sensitive in the injury/news sense
+- must reflect current season and recent-window filters
+
+Hard-fail conditions:
+- none by itself
+- if recent environment data is missing, log section confidence downward
+
+SECTION 4 - TEAM PLAY-TYPE PROFILE
+
+Purpose:
+Define how the team generates offense and how the opponent defends specific
+play types. This is the primary matchup mechanism replacing generic DvP.
+
+Fields collected:
+- team_isolation_freq
+- team_isolation_ppp
+- team_pnr_ballhandler_freq
+- team_pnr_ballhandler_ppp
+- team_pnr_rollman_freq
+- team_pnr_rollman_ppp
+- team_spot_up_freq
+- team_spot_up_ppp
+- team_post_freq
+- team_post_ppp
+- team_transition_freq
+- team_transition_ppp
+
+Sources:
+- nba.com/stats/teams/playtype-misc
+- nba.com/stats/teams/isolation
+- nba_api SynergyPlayTypes
+
+Qualification note:
+NBA.com play-type data requires:
+- minimum 10 minutes per game
+- minimum 10 possessions per play type
+
+If the player or play type does not qualify, log that play type as UNAVAILABLE.
+Do not treat non-appearance as zero frequency.
+
+Staleness rule:
+- current season only
+- recent role context matters more than season-long raw totals
+
+Hard-fail conditions:
+- no automatic hard fail here
+- missing core play-type data lowers matchup confidence materially
+
+SECTION 5 - PLAYER BASELINE STATS (GAME LOGS)
+
+Purpose:
+Establish recent production baseline through real game-by-game output, not flat
+season averages.
+
+Fields collected:
+- pts_l3
+- pts_l5
+- pts_l8
+- pts_l10
+- reb_l3
+- reb_l5
+- reb_l8
+- reb_l10
+- ast_l3
+- ast_l5
+- ast_l8
+- ast_l10
+- threepm_l3
+- threepm_l5
+- threepm_l8
+- threepm_l10
+- min_l3
+- min_l5
+- min_l8
+- min_l10
+
+Sources:
+- statmuse.com/nba
+- landofbasketball.com/nba_players_games/last_5/
+
+Staleness rule:
+- historical results are fixed
+
+Hard-fail conditions:
+- HF-05 if fewer than 8 relevant games are available
+
+SECTION 6 - PLAYER ROLE AND MINUTES PROJECTION
+
+Purpose:
+Translate role, usage, and team context into an expected minute range and role
+profile for tonight.
+
+Fields collected:
+- season_mpg
+- l5_mpg
+- l3_mpg
+- starter_flag
+- closing_rate_l10
+- projected_minutes_tonight
+- blowout_minutes_adjustment
+- usg_baseline
+- usg_adjusted_if_absence
+- home_away_adjustment_factor
+- role_fragility_score
+
+Sources:
+- Section 5 game logs
+- Section 1 injury layer
+- Section 2 lineup layer
+- Section 9 on/off and lineups
+
+USG redistribution formula:
+USG_adj = USG_baseline x (1 + 0.15 x (USG_absent / 100))
+[MODEL PARAMETER] - 0.15 multiplier is design-set and tunable.
+
+Home/away coefficients:
+HOME = 1.00
+AWAY = 0.97
+AWAY B2B cross-country = 0.94
+[MODEL PARAMETER] - design coefficients, not empirically validated constants.
+
+Corrected blowout adjustment:
+- favored team OVERs receive full spread-based reduction
+- underdog OVERs also require adjustment in blowout-loss scenarios
+- use 5% to 8% reduction for underdog stars on ELIMINATED or LOCKED_OUT_RISK
+  teams when late-game rest risk is credible
+- HIGH_URGENCY underdogs are not assumed to lose all Q4 minutes
+- UNDER props can benefit from blowout suppression on either side
+
+Staleness rule:
+- same-day role inputs must be refreshed through lineup and injury sections
+
+Hard-fail conditions:
+- HF-02 if confirmed restriction exists without stated cap
+
+SECTION 7 - REST, TRAVEL, AND SCHEDULE CONTEXT
+
+Purpose:
+Capture schedule compression and travel effects that reduce minutes, efficiency,
+and late-game stamina.
+
+Fields collected:
+- back_to_back_flag
+- exact_days_rest
+- opponent_back_to_back_flag
+- three_in_four_flag
+- four_in_six_flag
+- travel_distance_context
+- timezone_crossing_context
+
+Sources:
+- espn.com/nba/schedule
+- nbastuffer.com/2025-2026-nba-schedule-rest-days-analysis
+- nba.com/schedule
+
+Staleness rule:
+- schedule is fixed
+- same-day confirmation still required for B2B status integrity
+
+Hard-fail conditions:
+- HF-09 if back-to-back status cannot be confirmed
+
+SECTION 8 - MOMENTUM AND RECENT FORM
+
+Purpose:
+Weight recent games more heavily than older ones in late-season analysis.
+
+Fields collected:
+- l3_average
+- l5_average
+- l8_average
+- momentum_weighted_projection
+- variance_context
+- consistency_class
+
+Sources:
+- statmuse.com/nba
+
+Momentum decay formula:
+P_true = (L3 x 0.60) + (L5 x 0.30) + (L8 x 0.10)
+[MODEL PARAMETER] - weights are design-set and tunable.
+
+Staleness rule:
+- fixed historical data
+- must reflect current role era, not a prior rotation regime
+
+Hard-fail conditions:
+- no automatic hard fail
+- invalid distribution inputs roll into HF-06 later
+
+SECTION 9 - ON/OFF AND LINEUP CONTEXT
+
+Purpose:
+Measure how much the player's environment changes with specific teammates and
+lineup combinations on the floor.
+
+Fields collected:
+- lineup_net_rating_with_player
+- lineup_net_rating_without_player
+- on_off_differential
+- primary_lineup_combination
+- lineup_changes_l5_flag
+- teammate_dependency_notes
+
+Sources:
+- nba.com/stats/team/{team_id}/onoffcourt-summary
+- nba_api TeamPlayerOnOffSummary
+- nba.com/stats/lineups/advanced
+- nba.com/stats/lineups/traditional
+
+Operational note:
+On/off summary is team-specific, not one league-wide dashboard. Use official
+team_id pattern in browser or TeamPlayerOnOffSummary in local Python.
+
+Staleness rule:
+- current season only
+- prefer current-role and current-lineup context over stale season aggregates
+
+Hard-fail conditions:
+- none directly
+
+SECTION 14 - MARKET DATA AND LINE ANALYSIS
+
+Purpose:
+Capture the actual FanDuel execution market, consensus context, and line
+movement without letting recreational-market signals replace projection logic.
+
+Fields collected:
+- fd_prop_line
+- fd_over_odds
+- fd_under_odds
+- fd_snapshot_timestamp
+- opening_line
+- current_line_delta
+- consensus_line_multibook
+- public_betting_pct
+- sharp_money_signal
+- devigged_fair_probability
+
+Sources:
+- sportsbook.fanduel.com
+- actionnetwork.com/nba/props
+- actionnetwork.com/nba/public-betting
+- sportsbettingdime.com/nba/public-betting-trends
+- oddsshark.com/nba/odds
+
+Correction applied:
+sportsbettingdime.com/news/nba is removed. It is a news page, not a prop or
+public-betting market source.
+
+Staleness rule:
+- same-day sensitive
+- maximum 60 minutes stale before research completion
+
+Hard-fail conditions:
+- HF-01 if exact FanDuel line for the target prop is missing
+
+SECTION 15 - REFEREE CONTEXT
+
+Purpose:
+Add same-day referee assignment context without inventing historical crew data
+that has not been verified.
+
+Fields collected:
+- referee_crew_tonight
+- referee_assignment_timestamp
+- historical_foul_rate_status
+- confidence_if_missing
+
+Sources:
+- official.nba.com/referee-assignments
+
+Historical foul-rate status:
+UNAVAILABLE unless a specific verified maintained database has been directly
+confirmed and tested.
+
+Correction applied:
+RefMetrics is removed by name. No verified free public historical referee source
+has been established.
+
+Staleness rule:
+- same-day only
+- official posting is typically around 9:00 AM ET
+
+Hard-fail conditions:
+- no hard fail if historical crew rates are unavailable
+- missing historical referee rates must log confidence as UNDETERMINED
+
+================================================================================
+PART 4 - FORMULAS AND MODEL PARAMETERS
+================================================================================
+
+4.1 DE-VIGGING
+
+Classification:
+MATHEMATICALLY CORRECT - not a model parameter
+
+Formula:
+For + odds:
+Impl = 100 / (odds + 100)
+
+For - odds:
+Impl = |odds| / (|odds| + 100)
+
+Fair_Over = Impl_Over / (Impl_Over + Impl_Under)
+
+Validation rule:
+Fair_Over + Fair_Under must equal 1.000 +/- 0.001
+
+4.2 MOMENTUM DECAY
+
+Classification:
+[MODEL PARAMETER]
+
+Formula:
+P_true = (L3 x 0.60) + (L5 x 0.30) + (L8 x 0.10)
+
+Disclosure:
+Weights are engine design values, not empirically validated decay constants.
+Treat as tunable.
+
+4.3 USG REDISTRIBUTION
+
+Classification:
+[MODEL PARAMETER]
+
+Formula:
+USG_adj = USG_baseline x (1 + 0.15 x (USG_absent / 100))
+
+Disclosure:
+The 0.15 multiplier is a design-set value, not a published empirical constant.
+
+4.4 ROLE FRAGILITY
+
+Classification:
+[MODEL PARAMETER]
+
+Formula:
+role_fragility = (minute_volatility_score x 0.5) +
+((1.0 - last_n_role_consistency) x 0.5)
+
+Volatile trigger:
+>= 0.55
+
+Disclosure:
+Weighting and cutoff are design parameters.
+
+4.5 BLOWOUT THRESHOLDS
+
+Classification:
+[MODEL PARAMETER]
+
+Thresholds:
+- Spread >= 15 = HIGH (10% to 15% reduction on favored team)
+- Spread 10 to 14.5 = MEDIUM (5% to 10% reduction)
+- Spread < 10 = LOW
+- B2B + spread >= 10 = ELEVATED (+5%)
+- underdog adjustment = 5% to 8% in ELIMINATED or LOCKED_OUT_RISK blowout-loss
+  scenarios
+
+Disclosure:
+Thresholds and reduction bands are design parameters, not empirically validated
+league constants.
+
+4.6 HOME / AWAY COEFFICIENTS
+
+Classification:
+[MODEL PARAMETER]
+
+Values:
+- HOME = 1.00
+- AWAY = 0.97
+- AWAY B2B cross-country = 0.94
+
+Disclosure:
+These are engine-design coefficients and must be treated as tunable.
+
+================================================================================
+PART 5 - CORRECTED SOURCE MAP (v2.0)
+================================================================================
+
+Every source below must be treated according to its verified status.
+
+5.1 INJURY STATUS AND AVAILABILITY
+
+Preferred source:
+- official.nba.com/nba-injury-report-2025-26-season
+
+Verification sources:
+- covers.com/sport/basketball/nba/injuries
+- rotowire.com/basketball/injury-report.php
+
+Same-day sensitive:
+YES
+
+Hard-fail if missing:
+YES
+
+5.2 STARTING LINEUPS AND ROTATION DEPTH
+
+Preferred source:
+- rotowire.com/basketball/nba-lineups.php
+
+Fallback:
+- espn.com/nba/depth
+
+Same-day sensitive:
+YES
+
+Hard-fail if role ambiguity remains:
+YES
+
+5.3 PLAYER GAME LOGS
+
+Preferred source:
+- statmuse.com/nba
+
+Fallback:
+- landofbasketball.com/nba_players_games/last_5/
+
+Same-day sensitive:
+NO
+
+Hard-fail if sample is below L8 minimum:
+YES
+
+5.4 ADVANCED RATE STATS
+
+Preferred source:
+- nba.com/stats/players/advanced
+
+Browser access:
+- nba.com/stats/players/advanced
+
+Programmatic access:
+- nba_api LeagueDashPlayerStats
+
+Fallback:
+- statmuse.com/nba
+
+Same-day sensitive:
+NO
+
+5.5 TEAM ENVIRONMENT
+
+Preferred sources:
+- nba.com/stats/teams/four-factors
+- nba.com/stats/teams/advanced
+
+Programmatic access:
+- nba_api LeagueDashTeamStats
+
+Fallbacks:
+- teamrankings.com/nba/stat/possessions-per-game
+- statmuse.com/nba
+
+Prohibited as pipeline source:
+- Basketball Reference
+
+5.6 PLAY-TYPE OFFENSE AND DEFENSE
+
+Confirmed browser dashboards:
+- nba.com/stats/players/playtype-misc
+- nba.com/stats/players/transition
+- nba.com/stats/players/roll-man
+- nba.com/stats/players/playtype-post-up
+- nba.com/stats/players/off-screen
+- nba.com/stats/players/isolation
+- nba.com/stats/teams/playtype-misc
+- nba.com/stats/teams/isolation
+
+Programmatic source:
+- nba_api SynergyPlayTypes
+
+Qualification rule:
+- minimum 10 min/game
+- minimum 10 possessions per play type
+
+UNVERIFIED individual browser URLs:
+- nba.com/stats/players/pick-and-roll
+- nba.com/stats/players/spot-up
+- nba.com/stats/players/handoff
+- nba.com/stats/players/cut
+
+5.7 OPPONENT ZONE SHOOTING ALLOWED
+
+Primary source:
+- nba_api TeamDashPtShots
+
+Browser fallback proxy:
+- nba.com/stats/teams/defense-dash-lt6
+- nba.com/stats/teams/defense-dash-overall
+
+Secondary rough proxy:
+- fantasypros.com/nba/defense-vs-position.php
+
+Important note:
+True opponent court-zone shooting allowed requires local nba_api access.
+NBA.com browser pages do not provide a direct equivalent single-click table.
+
+5.8 PLAYER SHOOTING PROFILE AND SHOT QUALITY
+
+Zone shooting:
+- nba.com/stats/players/shooting
+
+Catch-and-shoot:
+- nba.com/stats/players/shots-general
+
+Pull-up:
+- nba.com/stats/players/shots-general
+
+Shooter closest-defender:
+- nba.com/stats/players/shots-closest-defender
+
+Unavailable enterprise sources:
+- Second Spectrum
+- Synergy enterprise shot-quality products
+
+5.9 PLAYER TRACKING DATA
+
+Touches and speed-distance:
+- nba.com/stats/players/speed-distance
+
+Passing and potential assists:
+- nba.com/stats/players/passing
+
+Hustle:
+- nba.com/stats/players/hustle
+
+5.10 GAME SCHEDULE AND REST
+
+Preferred source:
+- espn.com/nba/schedule
+
+Fallback:
+- nba.com/schedule
+
+Rest-pattern context:
+- nbastuffer.com/2025-2026-nba-schedule-rest-days-analysis
+
+5.11 REFEREE ASSIGNMENTS
+
+Only acceptable same-day source:
+- official.nba.com/referee-assignments
+
+Historical free source status:
+- UNAVAILABLE
+
+5.12 MARKET DATA
+
+Primary execution line:
+- sportsbook.fanduel.com
+
+Consensus props:
+- actionnetwork.com/nba/props
+
+Public betting:
+- actionnetwork.com/nba/public-betting
+- sportsbettingdime.com/nba/public-betting-trends
+
+Opening line context:
+- oddsshark.com/nba/odds
+
+Removed:
+- sportsbettingdime.com/news/nba
+
+5.13 CLUTCH AND PLAY-BY-PLAY
+
+Clutch dashboard:
+- nba.com/stats/players/clutch-traditional
+
+Play-by-play:
+- pbpstats Python library
+- github.com/dblackrun/pbpstats
+- pbpstats.readthedocs.io
+
+Paid web UI not allowed as free source:
+- tracking.pbpstats.com
+
+5.14 LINEUPS AND ON/OFF
+
+Lineups:
+- nba.com/stats/lineups/traditional
+- nba.com/stats/lineups/advanced
+
+On/off:
+- nba.com/stats/team/{team_id}/onoffcourt-summary
+- nba_api TeamPlayerOnOffSummary
+
+5.15 NBA.COM SEASON SEGMENT SUPPORT
+
+Confirmed dashboards with Last N Games filtering include:
+- nba.com/stats/players/advanced
+- nba.com/stats/players/traditional
+- nba.com/stats/players/boxscores-advanced
+- nba.com/stats/teams/four-factors
+- nba.com/stats/teams/advanced
+- nba.com/stats/teams/defense-dash-overall
+- nba.com/stats/teams/defense-dash-lt6
+- nba.com/stats/players/clutch-traditional
+
+5.16 nba_api FORMAL SOURCE CATEGORY
+
+GitHub:
+- github.com/swar/nba_api
+
+Install:
+- pip install nba_api
+
+Restriction:
+- local machine only for reliable access
+- blocked on common cloud hosting providers
+
+Key endpoints:
+- SynergyPlayTypes
+- TeamDashPtShots
+- TeamPlayerOnOffSummary
+- PlayerDashPtShots
+- PlayerDashPtPass
+- LeagueDashTeamStats
+- LeagueDashPlayerStats
+- TeamGameLog
+- PlayerGameLog
+
+================================================================================
+PART 6 - HARD FAIL CONDITIONS
+================================================================================
+
+HF-01: FanDuel prop line missing for target player or target market
+
+HF-02: Minutes restriction confirmed but cap or minutes estimate is not stated
+
+HF-03: Player status UNRESOLVABLE because same-day sources conflict and conflict
+cannot be resolved
+
+HF-04: Starting role or primary rotation slot remains ambiguous within 2 hours
+of tipoff
+
+HF-05: Fewer than 8 relevant games exist for the current sample window
+
+HF-06: Distribution fit invalid because std_raw <= 0 or mean_raw <= 0
+
+HF-07: Official status is OUT or INACTIVE
+
+HF-08: Official NBA injury report not accessible
+
+HF-09: Back-to-back flag cannot be confirmed from schedule data
+
+HF-10: No usable zone or matchup data exists for the primary matchup layer
+
+Hard-fail handling rule:
+If any hard fail triggers, the final output must read:
+NO RECOMMENDATION - [HARD-FAIL REASON]
+
+================================================================================
+PART 7 - CONFIDENCE SCORING AND OUTPUT FORMAT
+================================================================================
+
+7.1 CONFIDENCE CLASSES
+
+HIGH
+- all core fields present
+- all live fields fresh
+- no unresolved source conflicts
+- no major proxy substitutions
+
+MEDIUM
+- one or two secondary fields missing
+- or one proxy source required
+- no hard-fail event
+
+LOW
+- important contextual field missing
+- or major proxy dependence required
+- or section conflict resolved only with limited confidence
+- no hard-fail event
+
+UNDETERMINED
+- used when an optional but structurally meaningful layer, such as historical
+  referee tendency data, is unavailable and cannot be responsibly estimated
+
+7.2 REQUIRED OUTPUT FIELDS
+
+- player
+- prop_type
+- line
+- side
+- model_prob
+- fair_prob
+- edge
+- confidence_class
+- hard_fail_flags
+- notes
+
+7.3 REQUIRED LABELING STANDARD
+
+- All facts must be stated as sourced facts.
+- All estimates must be labeled MODEL ESTIMATE.
+- All missing items must be labeled MISSING or UNAVAILABLE.
+- All design-set coefficients or thresholds must retain [MODEL PARAMETER].
+
+7.4 FINAL OUTPUT CONTRACT
+
+The final research output must:
+
+- identify the exact FanDuel line and timestamp
+- state the prop side under evaluation
+- state fair probability after de-vigging
+- state model probability
+- state implied edge
+- state confidence class
+- list any triggered hard-fail flags
+- list the mechanism-based reason for the edge
+- avoid vague narrative phrasing
+
+END OF FRAMEWORK v2.0
+
+SECTION 10 - GAME SCRIPT AND BLOWOUT RISK
+
+Purpose:
+Translate market spread and team motivation into minute-compression risk.
+
+Fields collected:
+- spread
+- total
+- blowout_risk_class
+- favored_team_minutes_reduction
+- underdog_minutes_reduction
+- b2b_blowout_escalation
+
+Sources:
+- sportsbook.fanduel.com
+- actionnetwork.com/nba/props
+- oddsshark.com/nba/odds
+
+Blowout thresholds:
+- Spread >= 15 = HIGH
+- Spread 10 to 14.5 = MEDIUM
+- Spread < 10 = LOW
+- B2B + spread >= 10 = ELEVATED (+5%)
+[MODEL PARAMETER] - thresholds and reduction bands are design-set.
+
+Staleness rule:
+- same-day sensitive through live market movement
+
+Hard-fail conditions:
+- if live spread cannot be captured, downgrade confidence and log the gap
+
+SECTION 11 - SHOOTING PROFILE AND SHOT QUALITY
+
+Purpose:
+Define where the player shoots, how the player scores, and how shot quality is
+approximated without inaccessible enterprise products.
+
+Fields collected:
+- shot_zone_frequency
+- shot_zone_efficiency
+- catch_and_shoot_pct
+- pull_up_three_pct
+- contested_shot_profile
+- open_shot_profile
+- shot_quality_proxy
+
+Sources:
+- nba.com/stats/players/shooting with Distance Range = By Zone
+- nba.com/stats/players/shots-general with Shot Range = Catch and Shoot
+- nba.com/stats/players/shots-general with Shot Range = Pullups
+- nba.com/stats/players/shots-closest-defender
+
+Corrections applied:
+- catch-and-shoot source section name corrected
+- shooter-perspective closest-defender data kept here
+- Second Spectrum removed as accessible source
+- shot quality is approximated through zone and closest-defender splits
+
+Staleness rule:
+- current season only
+- recent-window use preferred when the dashboard supports it
+
+Hard-fail conditions:
+- no automatic hard fail
+- if shot-profile data is missing for a scoring or 3PM prop, log substantial
+  confidence degradation
+
+SECTION 12 - OPPONENT DEFENSIVE MATCHUP LAYER
+
+Purpose:
+Build the true opponent matchup mechanism using play-type defense, contest rate,
+zone allowance, and primary defender quality.
+
+Fields collected:
+- opp_defensive_rating_l10
+- opp_defensive_rating_l15
+- opp_play_type_defense_by_type
+- opp_team_contest_rate
+- opp_primary_defender_quality
+- opp_zone_shooting_allowed
+- opp_rim_deterrence
+- opp_three_point_rate_allowed
+- opp_foul_rate_allowed
+- dVp_proxy_flag
+
+Sources:
+- nba.com/stats/teams/defense-dash-lt6
+- nba.com/stats/players/defense-dash-lt6
+- nba.com/stats/players/defense-dash-overall
+- nba_api TeamDashPtShots
+- nba_api SynergyPlayTypes
+- fantasypros.com/nba/defense-vs-position.php
+
+Corrections applied:
+- closest-defender split into two sub-fields:
+  opp_team_contest_rate from teams/defense-dash-lt6
+  opp_primary_defender_quality from players/defense-dash-lt6
+- true opponent zone shooting allowed requires TeamDashPtShots
+- browser fallback from teams/defense-dash-lt6 is APPROXIMATE, not equivalent
+- FantasyPros is DvP proxy only, never primary
+- play-type qualification threshold applies here too
+
+Staleness rule:
+- current season only
+- recent-window defensive context preferred where supported
+
+Hard-fail conditions:
+- HF-10 if no usable zone or matchup data exists for the primary layer
+
+SECTION 13 - CLUTCH AND Q4 CLOSING CONTEXT
+
+Purpose:
+Measure whether the player actually closes competitive games and what their late
+game role looks like in high-leverage minutes.
+
+Fields collected:
+- clutch_usg_pct
+- clutch_minutes_profile
+- q4_minutes_l10
+- q4_closing_rate
+- blowout_exclusion_flags
+
+Sources:
+- nba.com/stats/players/clutch-traditional
+- pbpstats Python library
+- github.com/dblackrun/pbpstats
+
+Clutch definition:
+within 5 points, last 5 minutes of Q4 or OT
+
+Important correction:
+tracking.pbpstats.com web interface is PAID / PATREON REQUIRED.
+Use the free Python library, not the paid website.
+
+Staleness rule:
+- current season play-by-play only
+
+Hard-fail conditions:
+- none directly
