@@ -136,9 +136,10 @@ def evaluate_gate_c(leg: dict) -> tuple[str, list[str]]:
 
     # Branch 2: Strong valuation consensus
     if val_fair_p is not None:
+        disagreement = 1.0 if val_disagreement is None else val_disagreement
         branch2_pass = (
             val_book_count >= GATE_C_BRANCH2_BOOK_COUNT_MIN
-            and (val_disagreement or 1.0) < GATE_C_BRANCH2_DISAGREEMENT_MAX
+            and disagreement < GATE_C_BRANCH2_DISAGREEMENT_MAX
             and not val_stale
             and not val_inflation
             and (current_edge_pct or 0) >= GATE_C_BRANCH2_EDGE_MIN
@@ -151,7 +152,7 @@ def evaluate_gate_c(leg: dict) -> tuple[str, list[str]]:
             reasons.append(
                 f"INSUFFICIENT_BOOK_COUNT: {val_book_count} < {GATE_C_BRANCH2_BOOK_COUNT_MIN}"
             )
-        if (val_disagreement or 1.0) >= GATE_C_BRANCH2_DISAGREEMENT_MAX:
+        if disagreement >= GATE_C_BRANCH2_DISAGREEMENT_MAX:
             reasons.append(
                 f"HIGH_DISAGREEMENT: {val_disagreement} >= {GATE_C_BRANCH2_DISAGREEMENT_MAX}"
             )
