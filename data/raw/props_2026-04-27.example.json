@@ -1,0 +1,90 @@
+{
+  "slate_date": "2026-04-27",
+  "test_only": true,
+  "source_lineage": "test-example-structured-prop-export",
+  "market_timestamp": "2026-04-27T03:15:00Z",
+  "props": [
+    {
+      "game_id": "det-orl-20260427",
+      "matchup": "DET @ ORL",
+      "tip_time": "2026-04-27T20:00:00Z",
+      "player_id": "cade-cunningham",
+      "player_name": "Cade Cunningham",
+      "team": "DET",
+      "opponent": "ORL",
+      "market": "points",
+      "line": 21.5,
+      "fd_execution": {
+        "book_name": "FanDuel",
+        "over_american": -115,
+        "under_american": -105,
+        "market_status": "open",
+        "timestamp": "2026-04-27T03:15:00Z"
+      },
+      "valuation": [
+        {
+          "book_name": "DraftKings",
+          "over_american": -120,
+          "under_american": 100,
+          "timestamp": "2026-04-27T03:14:00Z"
+        },
+        {
+          "book_name": "BetMGM",
+          "over_american": -118,
+          "under_american": -102,
+          "timestamp": "2026-04-27T03:14:30Z"
+        }
+      ]
+    },
+    {
+      "game_id": "det-orl-20260427",
+      "matchup": "DET @ ORL",
+      "tip_time": "2026-04-27T20:00:00Z",
+      "player_id": "jalen-duren",
+      "player_name": "Jalen Duren",
+      "team": "DET",
+      "opponent": "ORL",
+      "market": "rebounds",
+      "line": 10.5,
+      "fd_execution": {
+        "book_name": "FanDuel",
+        "market_status": "open",
+        "timestamp": "2026-04-27T03:15:00Z"
+      },
+      "valuation": [
+        {
+          "book_name": "DraftKings",
+          "over_american": -110,
+          "under_american": -110,
+          "timestamp": "2026-04-27T03:14:00Z"
+        }
+      ]
+    },
+    {
+      "game_id": "det-orl-20260427",
+      "matchup": "DET @ ORL",
+      "tip_time": "2026-04-27T20:00:00Z",
+      "player_id": "det-orl-total",
+      "player_name": "Detroit Orlando Total",
+      "team": "DET",
+      "opponent": "ORL",
+      "market": "game_total",
+      "line": 214.5,
+      "fd_execution": {
+        "book_name": "FanDuel",
+        "over_american": -110,
+        "under_american": -110,
+        "market_status": "open",
+        "timestamp": "2026-04-27T03:15:00Z"
+      },
+      "valuation": [
+        {
+          "book_name": "DraftKings",
+          "over_american": -110,
+          "under_american": -110,
+          "timestamp": "2026-04-27T03:14:00Z"
+        }
+      ]
+    }
+  ]
+}
